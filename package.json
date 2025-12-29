@@ -15,7 +15,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepublishOnly": "npm run build"
+    "copy-tokens": "node scripts/copy-tokens.mjs",
+    "prepublishOnly": "npm run build && npm run copy-tokens"
   },
   "peerDependencies": {
     "react": "^19.2.0",
