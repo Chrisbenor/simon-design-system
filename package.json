@@ -15,6 +15,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "postbuild": "node scripts/fix-css-name.mjs",
     "copy-tokens": "node scripts/copy-tokens.mjs",
     "prepublishOnly": "npm run build && npm run copy-tokens"
   },
