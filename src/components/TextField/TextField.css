@@ -1,0 +1,202 @@
+/* TextField.css */
+
+.textfield {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tf-stack-gap, 8px);
+
+  --tf-label-row-height: 20px;
+  --tf-support-row-height: 16px;
+
+  --tf-control-height: 36px;
+  --tf-control-padding-y: 8px;
+  --tf-control-padding-x: 16px;
+  --tf-control-gap: 8px;
+
+  --tf-label-gap: 4px;
+  --tf-icon-size: 20px;
+
+  --tf-radius: var(--border-radius-s, 12px);
+
+  --tf-bg: var(--surface-default, #ffffff);
+  --tf-text: var(--text-default, #111);
+  --tf-placeholder: var(--text-placeholder, #9aa0a6);
+
+  --tf-label-color: var(--text-default, #111);
+  --tf-label-disabled: var(--text-disabled, #9aa0a6);
+
+  --tf-support-color: var(--text-subtle, #9aa0a6);
+
+  --tf-border-default: var(--border-default, #cfd3d8);
+  --tf-border-hover: var(--border-hover, #bfc5cc);
+  --tf-border-focus: var(--border-focus, #00c2a8);
+  --tf-border-error: var(--border-error, #e53935);
+  --tf-border-disabled: var(--border-disabled, #e5e7eb);
+
+  --tf-ring-color: var(--ring-focus, rgba(0, 194, 168, 0.25));
+  --tf-ring-width: 4px;
+  --tf-ring-offset: 2px;
+
+  --tf-icon-color: var(--icon-default, #9aa0a6);
+  --tf-icon-focus: var(--icon-focus, #00c2a8);
+  --tf-icon-disabled: var(--icon-disabled, #c0c4c9);
+}
+
+/* Label row */
+.textfield__labelRow {
+  height: var(--tf-label-row-height);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tf-label-gap);
+}
+
+.textfield__label {
+  color: var(--tf-label-color);
+  line-height: 20px;
+}
+
+.textfield--disabled .textfield__label {
+  color: var(--tf-label-disabled);
+}
+
+.textfield__required {
+  margin-left: 2px;
+  color: var(--tf-border-error);
+}
+
+.textfield__help {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--tf-icon-color);
+}
+
+.textfield__help:disabled {
+  cursor: not-allowed;
+  color: var(--tf-icon-disabled);
+}
+
+.textfield__helpDefaultIcon {
+  font-size: 12px;
+  line-height: 1;
+  transform: translateY(-0.5px);
+}
+
+/* Control */
+.textfield__control {
+  height: var(--tf-control-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--tf-control-gap);
+  padding: var(--tf-control-padding-y) var(--tf-control-padding-x);
+  box-sizing: border-box;
+
+  background: var(--tf-bg);
+  border-radius: var(--tf-radius);
+  border: 1px solid var(--tf-border-default);
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.textfield__control:hover {
+  border-color: var(--tf-border-hover);
+}
+
+.textfield__control:focus-within {
+  border-color: var(--tf-border-focus);
+  box-shadow:
+    0 0 0 var(--tf-ring-offset) transparent,
+    0 0 0 calc(var(--tf-ring-offset) + var(--tf-ring-width)) var(--tf-ring-color);
+}
+
+.textfield__control--error {
+  border-color: var(--tf-border-error);
+}
+
+.textfield__control--error:focus-within {
+  border-color: var(--tf-border-error);
+  box-shadow:
+    0 0 0 var(--tf-ring-offset) transparent,
+    0 0 0 calc(var(--tf-ring-offset) + var(--tf-ring-width)) rgba(229, 57, 53, 0.22);
+}
+
+.textfield--disabled .textfield__control,
+.textfield__control[aria-disabled="true"] {
+  border-color: var(--tf-border-disabled);
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.textfield--disabled .textfield__control:hover {
+  border-color: var(--tf-border-disabled);
+}
+
+/* Input */
+.textfield__input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--tf-text);
+}
+
+.textfield__input::placeholder {
+  color: var(--tf-placeholder);
+}
+
+.textfield__input:disabled {
+  cursor: not-allowed;
+}
+
+/* Icons */
+.textfield__icon {
+  width: var(--tf-icon-size);
+  height: var(--tf-icon-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tf-icon-color);
+  flex: 0 0 auto;
+}
+
+.textfield__control:focus-within .textfield__icon {
+  color: var(--tf-icon-focus);
+}
+
+.textfield--disabled .textfield__icon {
+  color: var(--tf-icon-disabled);
+}
+
+/* Sizes opcionales */
+.textfield__control--s {
+  height: 32px;
+}
+
+.textfield__control--m {
+  height: var(--tf-control-height);
+}
+
+.textfield__control--l {
+  height: 44px;
+}
+
+/* Support */
+.textfield__helper {
+  height: var(--tf-support-row-height);
+  display: flex;
+  align-items: center;
+  color: var(--tf-support-color);
+  line-height: 16px;
+}
+
+.textfield__helper--error {
+  color: var(--tf-border-error);
+}
