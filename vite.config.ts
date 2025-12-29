@@ -16,7 +16,10 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
+     entry: {
+      index: path.resolve(__dirname, "src/index.ts"),
+      styles: path.resolve(__dirname, "src/styles-entry.ts"),
+    },
       name: "SimonDesignSystem",
       formats: ["es", "cjs"],
       fileName: (format) =>
