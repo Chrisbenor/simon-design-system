@@ -1,11 +1,11 @@
 {
   "name": "@cobe84/design-system",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "main": "dist/nuwsdn-design-system.cjs",
   "module": "dist/nuwsd-design-system.es.js",
-   "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-     "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": "^19.2.0",
@@ -27,7 +27,7 @@
       "import": "./dist/nuwsd-design-system.es.js",
       "require": "./dist/nuwsd-design-system.cjs"
     },
-      "./styles": {
+    "./styles": {
       "default": "./dist/design-system.css"
     }
   },
