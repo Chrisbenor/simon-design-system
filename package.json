@@ -22,12 +22,16 @@
     "react-dom": "^19.2.0"
   },
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/nuwsd-design-system.es.js",
-      "require": "./dist/nuwsd-design-system.cjs"
-    },
-    "./styles": "./dist/design-system.css"
+     ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/nuwsd-design-system.es.js",
+    "require": "./dist/nuwsd-design-system.cjs"
+  },
+
+  "./styles": "./dist/design-system.css",
+
+  "./tokens/light": "./dist/tokens.light.css",
+  "./tokens/dark": "./dist/tokens.dark.css"
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",
