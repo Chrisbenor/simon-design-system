@@ -1,7 +1,7 @@
 {
   "name": "@cobe84/design-system",
   "private": false,
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "main": "dist/nuwsdn-design-system.cjs",
   "module": "dist/nuwsd-design-system.es.js",
