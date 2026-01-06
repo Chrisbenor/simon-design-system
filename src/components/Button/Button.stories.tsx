@@ -1,71 +1,70 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import { Button } from "./Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import Button, { DSButtonProps } from './Button';
 
-const ArrowRight = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path
-      d="M13 5l7 7-7 7M20 12H4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+type ButtonStoryProps = DSButtonProps & {
+  label: string;
+};
 
-const Plus = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path
-      d="M12 5v14M5 12h14"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+const meta: Meta<ButtonStoryProps> = {
+  title: 'Components/Button',
   component: Button,
   argTypes: {
-    variant: { control: { type: "radio" }, options: ["primary", "secondary", "ghost"] },
-    size: { control: { type: "radio" }, options: ["s", "m", "l"] },
-    disabled: { control: { type: "boolean" } },
-    label: { control: { type: "text" } },
-    onClick: { action: "clicked" },
+    label: { control: 'text' },
+
+    dsVariant: {
+      control: 'radio',
+      options: ['primary', 'secondary', 'ghost'],
+    },
+
+    dsSize: {
+      control: 'radio',
+      options: ['small', 'medium', 'large'],
+    },
+
+    disabled: { control: 'boolean' },
     iconLeft: { control: false },
     iconRight: { control: false },
+    onClick: { action: 'clicked' },
   },
+
+  render: ({ label, ...args }) => (
+    <Button {...args}>{label}</Button>
+  ),
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+
+type Story = StoryObj<ButtonStoryProps>;
 
 export const Primary: Story = {
-  args: { label: "Botón primario", variant: "primary", size: "m" },
-};
-
-export const WithLeftIcon: Story = {
-  args: { label: "Crear", variant: "primary", size: "m", iconLeft: <Plus /> },
-};
-
-export const WithRightIcon: Story = {
-  args: { label: "Continuar", variant: "secondary", size: "m", iconRight: <ArrowRight /> },
-};
-
-export const WithBothIcons: Story = {
   args: {
-    label: "Siguiente",
-    variant: "primary",
-    size: "l",
-    iconLeft: <Plus />,
-    iconRight: <ArrowRight />,
+    label: 'Botón primario',
+    dsVariant: 'primary',
+    dsSize: 'medium',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    label: 'Botón secundario',
+    dsVariant: 'secondary',
+    dsSize: 'medium',
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    label: 'Botón ghost',
+    dsVariant: 'ghost',
+    dsSize: 'medium',
   },
 };
 
 export const Disabled: Story = {
-  args: { label: "Deshabilitado", variant: "primary", size: "m", disabled: true, iconRight: <ArrowRight /> },
+  args: {
+    label: 'Deshabilitado',
+    dsVariant: 'primary',
+    disabled: true,
+  },
 };
