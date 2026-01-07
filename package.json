@@ -58,5 +58,8 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "dependencies": {
+    "@mui/icons-material": "^7.3.6"
   }
 }

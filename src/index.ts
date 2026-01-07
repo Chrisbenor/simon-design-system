@@ -6,7 +6,7 @@ import "./assets/fonts/fonts.css";*/
 
 // src/index.ts
 export { Button } from "./components/Button/Button";
-export type { ButtonProps } from "./components/Button/Button";
+export type { DSButtonProps } from "./components/Button/Button";
 
-export { TextField } from "./components/TextField/TextField";
-export type { TextFieldProps } from "./components/TextField/TextField";
+export { Input } from "./components/Input/Input";
+export type { DSInputProps } from "./components/Input/Input";

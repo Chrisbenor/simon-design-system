@@ -15,6 +15,8 @@ const WEIGHTS = [
 
 type WeightKey = (typeof WEIGHTS)[number]["key"];
 
+/* ---------------- helpers ---------------- */
+
 function readVarsFromStyleSheets(prefix: string): TokenRow[] {
   const varRegex = /(--[A-Za-z0-9-_]+)\s*:\s*([^;]+);/g;
   const map = new Map<string, string>();
@@ -53,7 +55,6 @@ function cssVar(name: string) {
 }
 
 function toPxNumber(v: string) {
-  // "64px" -> 64
   const m = v.trim().match(/^(-?\d+(\.\d+)?)px$/);
   return m ? parseFloat(m[1]) : NaN;
 }
@@ -63,14 +64,8 @@ function pxToRem(px: number) {
   return `${(px / 16).toFixed(px % 16 === 0 ? 0 : 2)}rem`;
 }
 
-function cap(s: string) {
-  return s ? s[0].toUpperCase() + s.slice(1) : s;
-}
-
 function styleTitle(styleKey: string) {
-  // h1 -> H1
   if (/^h[1-6]$/.test(styleKey)) return styleKey.toUpperCase();
-  // body-l -> Body L
   if (styleKey.startsWith("body-")) return `Body ${styleKey.replace("body-", "").toUpperCase()}`;
   if (styleKey.startsWith("label-")) return `Label ${styleKey.replace("label-", "").toUpperCase()}`;
   return styleKey.toUpperCase();
@@ -78,10 +73,12 @@ function styleTitle(styleKey: string) {
 
 function styleDescription(styleKey: string) {
   if (styleKey === "h1") {
-    return "H1 es el estilo con mayor prominencia y está pensado para destacar elementos de alto impacto visual, como cifras principales, montos o KPIs dentro de tarjetas o dashboards. No necesariamente será el título principal de una vista, pero sí el más visible cuando se requiera captar la atención de inmediato.";
+    return "H1 is the most prominent style, intended for high-impact elements such as KPIs, main figures, or hero numbers.";
   }
-  return "Estilo tipográfico documentado desde tokens semánticos. Puedes ajustar este texto por estilo si quieres descripciones específicas.";
+  return "Typography style documented from semantic tokens.";
 }
+
+/* ---------------- types ---------------- */
 
 type VariantSpec = {
   family: string;
@@ -91,36 +88,35 @@ type VariantSpec = {
 };
 
 type Block = {
-  platform: string; // web/tablet/mobile
-  category: string; // heading/body/label
-  styleKey: string; // h1/h2/body-l/...
+  platform: string;
+  category: string;
+  styleKey: string;
   variants: Partial<Record<WeightKey, VariantSpec>>;
 };
 
+/* ---------------- parsing ---------------- */
+
 function parseSemanticName(name: string) {
-  // Ej:
-  // --semantic-typography-web-heading-h1-light-font-size
   const n = name.replace(SEM_PREFIX, "");
   const parts = n.split("-");
   const platform = parts[0] || "web";
   const category = parts[1] || "typography";
 
-  // buscar weight key (light/regular/semibold/bold)
-  const weight = parts.find((p) => WEIGHTS.some((w) => w.key === p)) as WeightKey | undefined;
+  const weight = parts.find((p) => WEIGHTS.some((w) => w.key === p)) as
+    | WeightKey
+    | undefined;
 
-  // styleKey: lo que va entre category y weight
-  // web-heading-[STYLEKEY]-light-font-size
-  // => parts: [web, heading, h1, light, font, size]
   let styleKey = "unknown";
   if (weight) {
     const weightIdx = parts.indexOf(weight);
     if (weightIdx > 2) styleKey = parts.slice(2, weightIdx).join("-");
   }
 
-  // property: font-family / font-weight / font-size / line-height
-  const property = parts.slice(-2).join("-"); // e.g. "font-size"
+  const property = parts.slice(-2).join("-");
   return { platform, category, styleKey, weight, property };
 }
+
+/* ---------------- UI blocks ---------------- */
 
 function TypographyRow({
   label,
@@ -141,15 +137,13 @@ function TypographyRow({
         gridTemplateColumns: "260px 1fr",
         gap: 22,
         padding: "18px 0",
-        borderTop: "1px solid rgba(255,255,255,0.14)",
+        borderTop: "1px solid rgba(0,0,0,0.08)",
       }}
     >
-      {/* Columna izquierda: 64 - Light */}
       <div style={{ color: accent, fontWeight: 900, fontSize: 22 }}>
         {isFinite(sizePx) ? `${sizePx}` : "—"} · {label}
       </div>
 
-      {/* Columna derecha: Aa + specs */}
       <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
         <div
           style={{
@@ -158,8 +152,8 @@ function TypographyRow({
             borderRadius: 12,
             display: "grid",
             placeItems: "center",
-            border: "1px solid rgba(255,255,255,0.20)",
-            background: "rgba(255,255,255,0.04)",
+            border: "1px solid rgba(0,0,0,0.15)",
+            background: "rgba(0,0,0,0.03)",
           }}
         >
           <div
@@ -168,7 +162,7 @@ function TypographyRow({
               fontWeight: spec.weight as any,
               fontSize: spec.size,
               lineHeight: spec.lineHeight,
-              color: "rgba(255,255,255,0.88)",
+              color: "#111",
               margin: 0,
             }}
           >
@@ -176,8 +170,10 @@ function TypographyRow({
           </div>
         </div>
 
-        <div style={{ display: "grid", gap: 6, color: "rgba(255,255,255,0.72)" }}>
-          <div style={{ fontWeight: 800, color: "rgba(255,255,255,0.86)" }}>{spec.family || "—"}</div>
+        <div style={{ display: "grid", gap: 6, color: "#555" }}>
+          <div style={{ fontWeight: 800, color: "#111" }}>
+            {spec.family || "—"}
+          </div>
           <div>
             {spec.size || "—"} | {isFinite(sizePx) ? pxToRem(sizePx) : "—"}
           </div>
@@ -199,37 +195,48 @@ function TypographyBlockView({ block }: { block: Block }) {
   return (
     <section style={{ marginTop: 22 }}>
       <div style={{ marginBottom: 12 }}>
-        <div style={{ fontSize: 30, fontWeight: 900, color: "rgba(255,255,255,0.92)" }}>{title}</div>
-        <div style={{ marginTop: 6, color: "rgba(255,255,255,0.62)", lineHeight: 1.5, maxWidth: 980 }}>{desc}</div>
+        <div style={{ fontSize: 30, fontWeight: 900, color: "#111" }}>
+          {title}
+        </div>
+        <div style={{ marginTop: 6, color: "#666", lineHeight: 1.5, maxWidth: 980 }}>
+          {desc}
+        </div>
       </div>
 
-      <div style={{ height: 1, background: "rgba(255,255,255,0.18)", margin: "16px 0 0 0" }} />
+      <div style={{ height: 1, background: "rgba(0,0,0,0.12)", margin: "16px 0 0 0" }} />
 
       <div>
         {WEIGHTS.map(({ key, label }) => {
           const spec = block.variants[key];
           if (!spec) return null;
-
-          return <TypographyRow key={`${block.styleKey}-${key}`} label={label} spec={spec} accent={ACCENT} />;
+          return (
+            <TypographyRow
+              key={`${block.styleKey}-${key}`}
+              label={label}
+              spec={spec}
+              accent={ACCENT}
+            />
+          );
         })}
       </div>
     </section>
   );
 }
 
+/* ---------------- main doc ---------------- */
+
 function TypographyDoc() {
   const [filter, setFilter] = useState("");
 
   const blocks = useMemo(() => {
     const all = readVarsFromStyleSheets(SEM_PREFIX);
-
-    // Armamos specs por bloque (platform/category/styleKey)
     const map = new Map<string, Block>();
 
     for (const t of all) {
       const parsed = parseSemanticName(t.name);
       if (!parsed.weight) continue;
-      if (!["font-family", "font-weight", "font-size", "line-height"].includes(parsed.property)) continue;
+      if (!["font-family", "font-weight", "font-size", "line-height"].includes(parsed.property))
+        continue;
 
       const key = `${parsed.platform}:${parsed.category}:${parsed.styleKey}`;
       const b =
@@ -242,10 +249,9 @@ function TypographyDoc() {
         } as Block);
 
       const weightKey = parsed.weight;
+      const current =
+        b.variants[weightKey] || { family: "", weight: "", size: "", lineHeight: "" };
 
-      const current = b.variants[weightKey] || { family: "", weight: "", size: "", lineHeight: "" };
-
-      // Resuelve el valor real por CSS (por si es var(...))
       const resolved = cssVar(t.name) || t.value;
 
       if (parsed.property === "font-family") current.family = resolved.replace(/;+$/, "");
@@ -257,7 +263,6 @@ function TypographyDoc() {
       map.set(key, b);
     }
 
-    // Filtra solo bloques “completos” (al menos regular con size/family)
     let arr = Array.from(map.values()).filter((b) => {
       const r = b.variants["regular"];
       return !!(r && r.family && r.size && r.weight && r.lineHeight);
@@ -268,7 +273,6 @@ function TypographyDoc() {
       arr = arr.filter((b) => {
         const k = `${b.platform}-${b.category}-${b.styleKey}`.toLowerCase();
         if (k.includes(f)) return true;
-        // buscar por valores
         return WEIGHTS.some((w) => {
           const s = b.variants[w.key];
           if (!s) return false;
@@ -282,41 +286,20 @@ function TypographyDoc() {
       });
     }
 
-    // Orden: web primero, heading primero, H1..H6 arriba
-    const scoreStyle = (styleKey: string) => {
-      const m = styleKey.match(/^h([1-6])$/);
-      if (m) return parseInt(m[1], 10);
-      return 99;
-    };
-
-    const scorePlatform = (p: string) => (p === "web" ? 0 : p === "tablet" ? 1 : 2);
-    const scoreCategory = (c: string) => (c === "heading" ? 0 : c === "body" ? 1 : 2);
-
-    arr.sort((a, b) => {
-      const sp = scorePlatform(a.platform) - scorePlatform(b.platform);
-      if (sp) return sp;
-      const sc = scoreCategory(a.category) - scoreCategory(b.category);
-      if (sc) return sc;
-      const ss = scoreStyle(a.styleKey) - scoreStyle(b.styleKey);
-      if (ss) return ss;
-      return a.styleKey.localeCompare(b.styleKey);
-    });
-
     return arr;
   }, [filter]);
 
   return (
-    <div style={{ padding: 24, background: "#0B0B0B", minHeight: "100vh", color: "white" }}>
+    <div style={{ padding: 24, background: "#fff", minHeight: "100vh", color: "#111" }}>
       <div style={{ display: "flex", alignItems: "flex-start", gap: 18, marginBottom: 18 }}>
         <div>
           <div style={{ fontSize: 54, fontWeight: 900, lineHeight: 1.05, margin: 0 }}>
             Foundations · <br />
             Typography
           </div>
-          <div style={{ marginTop: 10, color: "rgba(255,255,255,0.60)", maxWidth: 980, lineHeight: 1.6 }}>
-            Documentación generada desde tokens <code style={{ color: "rgba(255,255,255,0.78)" }}>{SEM_PREFIX}*</code>.
-            <br />
-            Muestra variaciones por peso y los specs de cada estilo.
+          <div style={{ marginTop: 10, opacity: 0.7, maxWidth: 980, lineHeight: 1.6 }}>
+            Documentation generated from semantic tokens{" "}
+            <code>{SEM_PREFIX}*</code>.
           </div>
         </div>
 
@@ -329,10 +312,10 @@ function TypographyDoc() {
               width: 460,
               padding: "10px 12px",
               borderRadius: 12,
-              border: "1px solid rgba(255,255,255,0.14)",
+              border: "1px solid rgba(0,0,0,0.14)",
               outline: "none",
-              background: "rgba(255,255,255,0.06)",
-              color: "rgba(255,255,255,0.88)",
+              background: "rgba(0,0,0,0.04)",
+              color: "#111",
             }}
           />
         </div>
@@ -341,23 +324,32 @@ function TypographyDoc() {
       <div
         style={{
           borderRadius: 22,
-          border: "1px solid rgba(255,255,255,0.10)",
-          background: "rgba(255,255,255,0.02)",
+          border: "1px solid rgba(0,0,0,0.10)",
+          background: "rgba(0,0,0,0.02)",
           padding: 18,
         }}
       >
         {blocks.length ? (
-          blocks.map((b) => <TypographyBlockView key={`${b.platform}-${b.category}-${b.styleKey}`} block={b} />)
+          blocks.map((b) => (
+            <TypographyBlockView
+              key={`${b.platform}-${b.category}-${b.styleKey}`}
+              block={b}
+            />
+          ))
         ) : (
           <div style={{ padding: 10, opacity: 0.75 }}>
-            No encontré tokens semánticos para tipografía con <code>{SEM_PREFIX}</code>. <br />
-            Asegúrate que tu CSS de tokens esté importado en <code>.storybook/preview.ts</code>.
+            No semantic typography tokens found with <code>{SEM_PREFIX}</code>.
+            <br />
+            Make sure your tokens CSS is imported in{" "}
+            <code>.storybook/preview.ts</code>.
           </div>
         )}
       </div>
     </div>
   );
 }
+
+/* ---------------- Storybook ---------------- */
 
 const meta: Meta = {
   title: "Foundations/Typography",
@@ -371,5 +363,5 @@ export default meta;
 type Story = StoryObj;
 
 export const All: Story = {
-  render: () => <TypographyDoc />,
+  render: () => <TypographyDoc />, // 👈 siempre en modo claro
 };
