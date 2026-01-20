@@ -7,7 +7,7 @@ import { black } from '../../foundation/colors';
 
 import SideBackgroundLogo from '../../assets/side-logo.png';
 
-export type SideBarProps = {
+export type SMSideBarProps = {
   children: React.ReactNode;
   logoSrc: string;
   sx?: any;
@@ -16,7 +16,7 @@ export type SideBarProps = {
 const EXPANDED_WIDTH = 280;
 const COLLAPSED_WIDTH = 84;
 
-const SideBar = ({ children, logoSrc, sx }: SideBarProps) => {
+const SideBar = ({ children, logoSrc, sx }: SMSideBarProps) => {
   const [collapsed, setCollapsed] = React.useState(false);
 
   return (

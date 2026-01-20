@@ -16,20 +16,20 @@ import { spacingPx } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black, red, green } from '../../foundation/colors';
 
-export type DSInputState =
+export type SMInputState =
   | 'enable'
   | 'completed'
   | 'error'
   | 'success'
   | 'disabled';
 
-export type DSInputType =
+export type SMInputType =
   | 'text'
   | 'email'
   | 'password'
   | 'number';
 
-export type DSInputProps = {
+export type SMInputProps = {
   label?: string;
   required?: boolean;
   infoIcon?: React.ReactNode;
@@ -38,7 +38,7 @@ export type DSInputProps = {
 
   infoTooltipPlacement?: 'top' | 'bottom' | 'left' | 'right';
 
-  dsType?: DSInputType;
+  dsType?: SMInputType;
 
   value?: string;
   placeholder?: string;
@@ -49,7 +49,7 @@ export type DSInputProps = {
   onRightIconClick?: () => void;
 
   supportText?: string;
-  state?: DSInputState;
+  state?: SMInputState;
   pressed?: boolean;
 
   fullWidth?: boolean;
@@ -65,7 +65,7 @@ const isValidEmail = (value: string) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(v);
 };
 
-const stateTokens = (state: DSInputState) => {
+const stateTokens = (state: SMInputState) => {
   let borderColor = black[200];
   let textColor = black[900];
   let supportColor = black[500];
@@ -104,7 +104,7 @@ const stateTokens = (state: DSInputState) => {
   };
 };
 
-const Input = React.forwardRef(function Input(props: DSInputProps, ref: any) {
+const Input = React.forwardRef(function Input(props: SMInputProps, ref: any) {
   const {
     label,
     required,
@@ -143,7 +143,7 @@ const Input = React.forwardRef(function Input(props: DSInputProps, ref: any) {
     state !== 'error' &&
     !isValidEmail(String(value ?? ''));
 
-  const computedState: DSInputState = emailInvalid ? 'error' : state;
+  const computedState: SMInputState = emailInvalid ? 'error' : state;
 
   const { borderColor, textColor, supportColor, labelColor, asteriskColor } =
     stateTokens(computedState);

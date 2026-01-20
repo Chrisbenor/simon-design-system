@@ -2,7 +2,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import Input, { DSInputProps } from './Input';
+import Input, { SMInputProps } from './Input';
 
 // Demo icons
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
@@ -38,7 +38,7 @@ const iconMap: Record<IconKey, React.ReactNode> = {
   help: <HelpOutline fontSize="small" />,
 };
 
-type InputStoryProps = DSInputProps & {
+type InputStoryProps = SMInputProps & {
   storyLabel?: string;
 
   showLeftIcon?: boolean;

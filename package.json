@@ -1,10 +1,11 @@
 {
-  "name": "@cobe84/design-system",
+  "name": "simon-design-system",
+  "description": "A design system for Simon Movilidad built with React and MUI.",
   "private": false,
-  "version": "0.1.8",
+  "version": "0.1.9",
   "type": "module",
-  "main": "dist/nuwsdn-design-system.cjs",
-  "module": "dist/nuwsd-design-system.es.js",
+  "main": "dist/simon-design-system.cjs",
+  "module": "dist/simon-design-system.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"

@@ -6,7 +6,7 @@ import { spacingPx } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black } from '../../foundation/colors';
 
-export type DSCheckboxProps = {
+export type SMCheckboxProps = {
   /** Label content rendered to the right (optional). Use children instead of label prop. */
   children?: React.ReactNode;
   showLabel?: boolean;
@@ -28,7 +28,7 @@ const CHECK_SIZE = 20;
 const HIT = 36;
 const RADIUS = 0;
 
-const Checkbox = React.forwardRef(function Checkbox(props: DSCheckboxProps, ref: any) {
+const Checkbox = React.forwardRef(function Checkbox(props: SMCheckboxProps, ref: any) {
   const {
     children,
     showLabel = true,

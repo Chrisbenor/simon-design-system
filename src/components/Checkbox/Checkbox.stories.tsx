@@ -2,9 +2,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import Checkbox, { DSCheckboxProps } from './Checkbox';
+import Checkbox, { SMCheckboxProps } from './Checkbox';
 
-type CheckboxStoryProps = DSCheckboxProps & {
+type CheckboxStoryProps = SMCheckboxProps & {
   // Story-only (for easy text control in stories)
   storyText?: string;
 };

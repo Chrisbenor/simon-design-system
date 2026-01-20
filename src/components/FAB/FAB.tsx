@@ -11,7 +11,7 @@ export type FabSize = 's' | 'normal' | 'l';
 export type FabType = 'principal' | 'secundario' | 'ghost';
 export type FabState = 'default' | 'hover' | 'focus' | 'disabled';
 
-export type FABProps = {
+export type SMFABProps = {
   icon: React.ReactNode;
 
   size?: FabSize;
@@ -161,7 +161,7 @@ const getVariantSx = (type: FabType): any => {
   };
 };
 
-const FAB = React.forwardRef<HTMLButtonElement, FABProps>(function FAB(
+const FAB = React.forwardRef<HTMLButtonElement, SMFABProps>(function FAB(
   { icon, size = 'normal', type = 'principal', state = 'default', onClick, disabled = false, sx },
   ref
 ) {

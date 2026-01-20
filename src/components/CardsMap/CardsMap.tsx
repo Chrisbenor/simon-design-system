@@ -14,7 +14,7 @@ import CircleXIcon from '../../assets/icons/circle-x.svg';
 
 export type DeviceStatus = 'online' | 'offline' | 'warning' | string;
 
-export type CardsMapProps = {
+export type SMCardsMapProps = {
   id: string | number;
 
   name: string;
@@ -95,7 +95,7 @@ const CardsMap = ({
 
   getStatusLabel,
   style,
-}: CardsMapProps) => {
+}: SMCardsMapProps) => {
   const disabled = !interactive || Boolean(disabledProp);
   const isSelected = selectedId === id;
 

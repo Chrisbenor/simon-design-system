@@ -34,7 +34,7 @@ export type MenuItemSubItem = {
   onClick?: () => void;
 };
 
-export type MenuItemProps = {
+export type SMMenuItemProps = {
   hasIcon?: boolean;
   item?: MenuItemItem;
   state?: MenuItemState;
@@ -68,7 +68,7 @@ const iconMap = {
   },
 } as const;
 
-const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
+const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
   function MenuItem(
     {
       hasIcon = true,

@@ -2,9 +2,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import StatusBadge, { StatusBadgeProps } from './StatusBadge';
+import StatusBadge, { SMStatusBadgeProps } from './StatusBadge';
 
-type StatusBadgeStoryProps = StatusBadgeProps & {
+type StatusBadgeStoryProps = SMStatusBadgeProps & {
   // Story-only (para controlar el texto sin romper el shape del componente)
   storyText?: string;
 };

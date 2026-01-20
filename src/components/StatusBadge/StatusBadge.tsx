@@ -15,7 +15,7 @@ export type StatusBadgeColor =
 
 export type StatusBadgePill = 'no' | 'yes';
 
-export type StatusBadgeProps = Omit<BoxProps, 'color'> & {
+export type SMStatusBadgeProps = Omit<BoxProps, 'color'> & {
   hasText?: boolean;
   hasLeftIcon?: boolean;
   hasRightIcon?: boolean;
@@ -97,7 +97,7 @@ const colorTokens = (dsColor: StatusBadgeColor) => {
 };
 
 const StatusBadge = React.forwardRef(function StatusBadge(
-  props: StatusBadgeProps,
+  props: SMStatusBadgeProps,
   ref: any
 ) {
   const {

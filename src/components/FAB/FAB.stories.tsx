@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
-import FAB, { FABProps } from './FAB';
+import FAB, { SMFABProps } from './FAB';
 
-const meta: Meta<FABProps> = {
+const meta: Meta<SMFABProps> = {
   title: 'Components/FAB',
   component: FAB,
   tags: ['autodocs'],
@@ -38,7 +38,7 @@ const meta: Meta<FABProps> = {
 
 export default meta;
 
-type Story = StoryObj<FABProps>;
+type Story = StoryObj<SMFABProps>;
 
 export const Playground: Story = {
   args: {

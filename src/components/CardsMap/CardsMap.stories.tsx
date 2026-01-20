@@ -3,12 +3,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import CardsMap from './CardsMap';
-import type { CardsMapProps, DeviceStatus } from './CardsMap';
+import type { SMCardsMapProps, DeviceStatus } from './CardsMap';
 
 type StatusOption = 'online' | 'offline' | 'warning' | 'unknown';
 
 type CardsMapStoryProps = Omit<
-  CardsMapProps,
+  SMCardsMapProps,
   'status' | 'labels' | 'selectedId' | 'onSelect'
 > & {
   widgetWidth?: number;

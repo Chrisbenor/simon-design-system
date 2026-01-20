@@ -8,15 +8,15 @@ import { borderWidth } from '../../foundation/border';
 import { elevation } from '../../foundation/elevation';
 import { aquamarine, black } from '../../foundation/colors';
 
-export type DSPaginationItemState = 'normal' | 'selected' | 'disabled';
+export type SMPaginationItemState = 'normal' | 'selected' | 'disabled';
 
-export type DSPaginationItemProps = Omit<ButtonBaseProps, 'disabled' | 'style'> & {
+export type SMPaginationItemProps = Omit<ButtonBaseProps, 'disabled' | 'style'> & {
   
   paginationText?: React.ReactNode;
 
   showText?: boolean;
 
-  state?: DSPaginationItemState;
+  state?: SMPaginationItemState;
 
   forceHover?: boolean;
   forcePressed?: boolean;
@@ -31,7 +31,7 @@ const RADIUS = 4;
 const focusRing = `0 0 0 3px ${alpha(aquamarine[400], 0.35)}`;
 
 const tokensByState = (
-  state: DSPaginationItemState,
+  state: SMPaginationItemState,
   hovered: boolean,
   pressed: boolean
 ) => {
@@ -78,7 +78,7 @@ const tokensByState = (
 };
 
 const PaginationItem = React.forwardRef(function PaginationItem(
-  props: DSPaginationItemProps,
+  props: SMPaginationItemProps,
   ref: any
 ) {
   const {

@@ -2,9 +2,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import PaginationItem, { DSPaginationItemProps } from './PaginationItem';
+import PaginationItem, { SMPaginationItemProps } from './PaginationItem';
 
-type PaginationItemStoryProps = DSPaginationItemProps & {
+type PaginationItemStoryProps = SMPaginationItemProps & {
   // Story-only: easier control for number/text inside
   storyText?: string;
 };

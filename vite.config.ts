@@ -4,27 +4,29 @@ import dts from "vite-plugin-dts";
 import path from "path";
 
 export default defineConfig({
-  plugins: [react(),
-  dts({
-    entryRoot: "src",
-    include: ["src"],
-    exclude: ["**/*.stories.*", "**/*.test.*", "**/*.spec.*"],
-    insertTypesEntry: true,
-    tsconfigPath: "./tsconfig.json",
-  }),
+  plugins: [
+    react(),
+    dts({
+      entryRoot: "src",
+      exclude: ["**/*.stories.*", "**/*.test.*", "**/*.spec.*"],
+      insertTypesEntry: true,
+      tsconfigPath: "./tsconfig.json",
+    }),
   ],
+
   build: {
     cssCodeSplit: false,
+
     lib: {
-     entry: {
-      index: path.resolve(__dirname, "src/index.ts"),
-      styles: path.resolve(__dirname, "src/styles-entry.ts"),
-    },
+      entry: path.resolve(__dirname, "src/index.ts"),
       name: "SimonDesignSystem",
       formats: ["es", "cjs"],
       fileName: (format) =>
-        format === "es" ? "nuwsd-design-system.es.js" : "nuwsd-design-system.cjs",
+        format === "es"
+          ? "nuwsd-design-system.es.js"
+          : "nuwsd-design-system.cjs",
     },
+
     rollupOptions: {
       external: ["react", "react-dom"],
       output: {

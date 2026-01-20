@@ -4,9 +4,8 @@ import "./components/Button/Button.css";
 import "./components/TextField/TextField.css";
 import "./assets/fonts/fonts.css";*/
 
-// src/index.ts
-export { Button } from "./components/Button/Button";
-export type { DSButtonProps } from "./components/Button/Button";
+import './index.css';
 
-export { Input } from "./components/Input/Input";
-export type { DSInputProps } from "./components/Input/Input";
+// API pública
+export * from './components';
+export * from './foundation';

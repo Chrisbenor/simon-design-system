@@ -16,7 +16,7 @@ import { aquamarine, black, red } from '../../foundation/colors';
 
 import ProfileCard from '../ProfileCard/ProfileCard';
 
-export type NavBarProps = {
+export type SMNavBarProps = {
   title: string;
 
   user: {
@@ -42,7 +42,7 @@ const NavBar = ({
   onNotifications,
   forceMobile,
   sx,
-}: NavBarProps) => {
+}: SMNavBarProps) => {
   const theme = useTheme();
   const isMobileViewport = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobile = forceMobile ?? isMobileViewport;

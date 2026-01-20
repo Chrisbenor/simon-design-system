@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import Button, { DSButtonProps } from './Button';
+import Button, { SMButtonProps } from './Button';
 
-type ButtonStoryProps = DSButtonProps & {
+type ButtonStoryProps = SMButtonProps & {
   label: string;
 };
 

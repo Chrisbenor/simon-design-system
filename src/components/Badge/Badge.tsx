@@ -15,7 +15,7 @@ export type BadgeColor =
 
 export type BadgePill = 'no' | 'yes';
 
-export type BadgeProps = Omit<BoxProps, 'color'> & {
+export type SMBadgeProps = Omit<BoxProps, 'color'> & {
   hasText?: boolean;
   text?: string;
   dsColor?: BadgeColor;
@@ -56,7 +56,7 @@ const colorTokens = (dsColor: BadgeColor) => {
   return { bg, border, text };
 };
 
-const Badge = React.forwardRef(function Badge(props: BadgeProps, ref: any) {
+const Badge = React.forwardRef(function Badge(props: SMBadgeProps, ref: any) {
   const {
     hasText = true,
     text = 'Badges',

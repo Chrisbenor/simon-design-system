@@ -11,14 +11,13 @@ import { gradientsButton } from '../../foundation/gradients';
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'small' | 'medium' | 'large';
 
-export type DSButtonProps = Omit<MuiButtonProps, 'variant' | 'size' | 'color'> & {
+export type SMButtonProps = Omit<MuiButtonProps, 'variant' | 'size' | 'color'> & {
   dsVariant?: ButtonVariant;
   dsSize?: ButtonSize;
   iconLeft?: unknown;
   iconRight?: unknown;
 };
 
-// Fixed sizes like Figma
 const sizeStyles: Record<ButtonSize, any> = {
   small: {
     ...typography.desktop.bodyS.bold,
@@ -175,7 +174,7 @@ secondary: {
   },
 };
 
-const Button = React.forwardRef(function Button(props: DSButtonProps, ref: any) {
+const Button = React.forwardRef(function Button(props: SMButtonProps, ref: any) {
   const {
     dsVariant = 'primary',
     dsSize = 'medium',

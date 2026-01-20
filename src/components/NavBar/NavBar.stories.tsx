@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import NavBar, { NavBarProps } from './NavBar';
+import NavBar, { SMNavBarProps } from './NavBar';
 
 type ContainerWidth = 'desktop' | 'tablet' | 'mobile';
 
-type NavBarStoryProps = NavBarProps & {
+type NavBarStoryProps = SMNavBarProps & {
   containerWidth?: ContainerWidth;
 };
 

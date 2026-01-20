@@ -10,10 +10,10 @@ import { spacingPx } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black, red, green } from '../../foundation/colors';
 
-export type DSTextAreaState = 'enable' | 'completed' | 'error' | 'disable' | 'success';
-export type DSTextAreaPressed = 'no' | 'yes';
+export type SMTextAreaState = 'enable' | 'completed' | 'error' | 'disable' | 'success';
+export type SMTextAreaPressed = 'no' | 'yes';
 
-export type TextAreaProps = {
+export type SMTextAreaProps = {
   isRequired?: boolean;
 
   hasInfoIcon?: boolean;
@@ -29,8 +29,8 @@ export type TextAreaProps = {
   hasOtherText?: boolean;
   otherText?: string;
 
-  state?: DSTextAreaState;
-  pressed?: DSTextAreaPressed;
+  state?: SMTextAreaState;
+  pressed?: SMTextAreaPressed;
 
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -48,7 +48,7 @@ export type TextAreaProps = {
 const FIELD_HEIGHT = 88;
 const focusRing = '0 0 0 3px rgba(0, 241, 199, 0.35)';
 
-const stateTokens = (state: DSTextAreaState) => {
+const stateTokens = (state: SMTextAreaState) => {
   let borderColor = black[200];
   let textColor = black[900];
   let supportColor = black[500];
@@ -83,7 +83,7 @@ const stateTokens = (state: DSTextAreaState) => {
   };
 };
 
-const TextArea = React.forwardRef<HTMLDivElement, TextAreaProps>(function TextArea(props, ref) {
+const TextArea = React.forwardRef<HTMLDivElement, SMTextAreaProps>(function TextArea(props, ref) {
   const {
     isRequired = false,
     hasInfoIcon = false,

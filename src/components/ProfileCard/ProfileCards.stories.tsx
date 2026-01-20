@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import ProfileCard, { ProfileCardProps } from './ProfileCard';
+import ProfileCard, { SNProfileCardProps } from './ProfileCard';
 
-type StoryProps = ProfileCardProps;
+type StoryProps = SNProfileCardProps;
 
 import avatarImg from '../../assets/avatar.png';
 

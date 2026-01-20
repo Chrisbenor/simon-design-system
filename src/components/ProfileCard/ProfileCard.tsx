@@ -6,9 +6,9 @@ import { typography } from '../../foundation/typography';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black } from '../../foundation/colors';
 
-export type ProfileCardType = 'open' | 'close';
+export type SMProfileCardType = 'open' | 'close';
 
-export type ProfileCardProps = {
+export type SNProfileCardProps = {
   hasName?: boolean;
   name?: string;
 
@@ -20,7 +20,7 @@ export type ProfileCardProps = {
   hasPhoto?: boolean;
   photoSrc?: string;
 
-  type?: ProfileCardType;
+  type?: SMProfileCardType;
 
   collapsed?: boolean;
 
@@ -36,8 +36,8 @@ export type ProfileCardProps = {
 
 const AVATAR_SIZE = 30;
 
-const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
-  function ProfileCard(
+const ProfileCard = React.forwardRef<HTMLButtonElement, SNProfileCardProps>(
+  function SMProfileCard(
     {
       hasName = true,
       name = '',

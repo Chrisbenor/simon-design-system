@@ -2,9 +2,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import Badge, { BadgeProps } from './Badge';
+import Badge, { SMBadgeProps } from './Badge';
 
-type BadgeStoryProps = BadgeProps & {
+type BadgeStoryProps = SMBadgeProps & {
   storyText?: string;
 };
 
