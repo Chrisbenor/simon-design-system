@@ -22,7 +22,9 @@ export type ProfileCardProps = {
 
   type?: ProfileCardType;
 
-  onClick?: () => void;
+  collapsed?: boolean;
+
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 
   id?: string;
   'aria-controls'?: string;
@@ -49,6 +51,7 @@ const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
       photoSrc,
 
       type = 'close',
+      collapsed = false,
 
       onClick,
 
@@ -70,9 +73,8 @@ const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
         sx={{
           display: 'flex',
           alignItems: 'center',
-
-          gap: 1.5,                
-          padding: '6px 10px',      
+          gap: collapsed ? 0 : 1.5,
+          padding: collapsed ? '4px' : '6px 10px',
 
           borderRadius: 12,
           textAlign: 'left',
@@ -114,8 +116,8 @@ const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
           {initial}
         </Avatar>
 
-        {/* Text */}
-        {(hasName || hasRol) && (
+        {/* Text (desktop only) */}
+        {!collapsed && (hasName || hasRol) && (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             {hasName && (
               <Typography
@@ -124,7 +126,7 @@ const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
                   fontFamily: typography.desktop.body.regular.fontFamily,
                   fontWeight: 400,
                   fontSize: 20,
-                  lineHeight: 1.2,   
+                  lineHeight: 1.2,
                   color: black[900],
                 }}
               >
@@ -139,7 +141,7 @@ const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
                   fontFamily: typography.desktop.bodyS.regular.fontFamily,
                   fontWeight: typography.desktop.bodyS.regular.fontWeight,
                   fontSize: 12,
-                  lineHeight: 1.2,   
+                  lineHeight: 1.2,
                   color: aquamarine[700],
                 }}
               >
@@ -149,8 +151,8 @@ const ProfileCard = React.forwardRef<HTMLButtonElement, ProfileCardProps>(
           </Box>
         )}
 
-        {/* Dropdown icon */}
-        {hasDropdown && (
+        {/* Dropdown icon (desktop only) */}
+        {hasDropdown && !collapsed && (
           <KeyboardArrowDownIcon
             sx={{
               fontSize: 24,

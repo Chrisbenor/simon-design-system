@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, BoxProps } from '@mui/material';
 
 import { typography } from '../../foundation/typography';
-import { spacingPx } from '../../foundation/spacing';
+import { spacingRem } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black, green, red, yellow } from '../../foundation/colors';
 
@@ -98,9 +98,9 @@ const Badge = React.forwardRef(function Badge(props: BadgeProps, ref: any) {
         minHeight: { xs: 24, sm: 24, md: 24 },
 
         paddingInline: {
-          xs: spacingPx.compact,
-          sm: spacingPx.compact,
-          md: spacingPx.compact,
+          xs: spacingRem.compact,
+          sm: spacingRem.compact,
+          md: spacingRem.compact,
         },
 
         borderRadius: radius,

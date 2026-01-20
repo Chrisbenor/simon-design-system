@@ -24,7 +24,12 @@ const meta: Meta<StoryProps> = {
     hasPhoto: { control: 'boolean' },
     photoSrc: { control: 'text' },
 
-    type: { control: { type: 'inline-radio' }, options: ['open', 'close'] },
+    type: {
+      control: { type: 'inline-radio' },
+      options: ['open', 'close'],
+    },
+
+    collapsed: { control: 'boolean' },
 
     onClick: { control: false },
     sx: { control: false },
@@ -50,6 +55,7 @@ export const Default: Story = {
     hasPhoto: false,
     photoSrc: avatarImg,
 
+    collapsed: false,
     type: 'close',
   },
 };
@@ -58,6 +64,13 @@ export const Open: Story = {
   args: {
     ...Default.args,
     type: 'open',
+  },
+};
+
+export const Collapsed: Story = {
+  args: {
+    ...Default.args,
+    collapsed: true,
   },
 };
 

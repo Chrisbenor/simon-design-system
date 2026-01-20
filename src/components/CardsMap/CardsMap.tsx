@@ -145,7 +145,6 @@ const CardsMap = ({
               borderRadius: 2,
               border: `${borderWidth.extraSmall}px solid ${black[200]}`,
 
-              // ✅ padding similar al diseño real
               padding: `${spacingPx.small}px ${spacingPx.small}px`,
 
               boxShadow: isSelected ? elevation.extraSmall : 'none',
