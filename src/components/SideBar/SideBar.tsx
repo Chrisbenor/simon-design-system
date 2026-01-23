@@ -6,18 +6,36 @@ import { spacingRem } from '../../foundation/spacing';
 import { black } from '../../foundation/colors';
 
 import SideBackgroundLogo from '../../assets/side-logo.png';
+import type { SMMenuItemProps } from '../MenuItem/MenuItem';
 
 export type SMSideBarProps = {
   children: React.ReactNode;
   logoSrc: string;
   sx?: any;
+
+  onCollapseChange?: (collapsed: boolean) => void;
 };
 
 const EXPANDED_WIDTH = 280;
 const COLLAPSED_WIDTH = 84;
 
-const SideBar = ({ children, logoSrc, sx }: SMSideBarProps) => {
+const SideBar = ({
+  children,
+  logoSrc,
+  sx,
+  onCollapseChange,
+}: SMSideBarProps) => {
   const [collapsed, setCollapsed] = React.useState(false);
+
+  const [activeId, setActiveId] = React.useState<string | null>(null);
+
+  const toggleCollapsed = React.useCallback(() => {
+    setCollapsed((prev) => {
+      const next = !prev;
+      onCollapseChange?.(next);
+      return next;
+    });
+  }, [onCollapseChange]);
 
   return (
     <Box
@@ -28,7 +46,7 @@ const SideBar = ({ children, logoSrc, sx }: SMSideBarProps) => {
         display: 'flex',
         flexDirection: 'column',
         paddingY: spacingRem.medium,
-        backgroundColor: '#ffffff',
+        backgroundColor: 'transparent',
         transition: 'width 0.25s ease',
         overflow: 'hidden',
         ...(sx || {}),
@@ -47,7 +65,7 @@ const SideBar = ({ children, logoSrc, sx }: SMSideBarProps) => {
         }}
       >
         <IconButton
-          onClick={() => setCollapsed((v) => !v)}
+          onClick={toggleCollapsed}
           sx={{
             color: black[500],
             width: 36,
@@ -77,13 +95,17 @@ const SideBar = ({ children, logoSrc, sx }: SMSideBarProps) => {
           zIndex: 2,
         }}
       >
-        {React.Children.map(children, (child) =>
-          React.isValidElement(child)
-            ? React.cloneElement(child as React.ReactElement<any>, {
-                collapsed,
-              })
-            : child
-        )}
+        {React.Children.map(children, (child) => {
+          if (!React.isValidElement<SMMenuItemProps>(child)) return child;
+
+          const id = child.props.id;
+
+          return React.cloneElement(child, {
+            collapsed,
+            state: id === activeId ? 'selected' : 'enable',
+            onClick: () => setActiveId(id),
+          });
+        })}
       </Box>
 
       {/* Background logo */}
@@ -92,16 +114,15 @@ const SideBar = ({ children, logoSrc, sx }: SMSideBarProps) => {
         src={SideBackgroundLogo}
         alt=""
         aria-hidden
-        paddingBottom={8}
         sx={{
           position: 'absolute',
           bottom: 0,
-          left: '0%',
-          width: 'auto', 
+          left: 0,
           maxWidth: '100%',
-          transition: 'width 0.25s ease, opacity 0.25s ease',
           pointerEvents: 'none',
           userSelect: 'none',
+          opacity: collapsed ? 0 : 1,
+          transition: 'opacity 0.2s ease',
         }}
       />
     </Box>

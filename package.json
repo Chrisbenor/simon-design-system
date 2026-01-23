@@ -2,17 +2,21 @@
   "name": "simon-design-system",
   "description": "A design system for Simon Movilidad built with React and MUI.",
   "private": false,
-  "version": "0.1.9",
+  "version": "0.1.11",
   "type": "module",
   "main": "dist/simon-design-system.cjs",
   "module": "dist/simon-design-system.es.js",
   "types": "./dist/index.d.ts",
+  "style": "dist/design-system.css",
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && xcopy public dist /E /I /Y",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

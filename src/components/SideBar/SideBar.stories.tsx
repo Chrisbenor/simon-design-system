@@ -6,9 +6,14 @@ import MenuItem from '../MenuItem/MenuItem';
 
 import logo from '../../assets/logo-light.svg';
 
-/* =========================
-   Story-only props
-========================= */
+import MapPinIcon from '../../assets/icons/map-pin.svg';
+import MapPinSelectedIcon from '../../assets/icons/map-pin-selected.svg';
+
+import ReportIcon from '../../assets/icons/report.svg';
+import ReportSelectedIcon from '../../assets/icons/report-selected.svg';
+
+import SettingsIcon from '../../assets/icons/map-pinned.svg';
+
 type SideBarStoryProps = {
   showMapa?: boolean;
   showGuantera?: boolean;
@@ -22,31 +27,16 @@ const meta = {
 
   parameters: {
     layout: 'fullscreen',
-
-    /* 👇 AQUÍ es donde se ocultan */
     controls: {
       exclude: ['children', 'logoSrc', 'sx'],
     },
   },
 
   argTypes: {
-    /* ✅ CHECKBOXES LIMPIOS */
-    showMapa: {
-      control: { type: 'boolean' },
-      name: 'Mapa',
-    },
-    showGuantera: {
-      control: { type: 'boolean' },
-      name: 'Guantera',
-    },
-    showReportes: {
-      control: { type: 'boolean' },
-      name: 'Reportes',
-    },
-    showAjustes: {
-      control: { type: 'boolean' },
-      name: 'Ajustes',
-    },
+    showMapa: { control: { type: 'boolean' }, name: 'Mapa' },
+    showGuantera: { control: { type: 'boolean' }, name: 'Guantera' },
+    showReportes: { control: { type: 'boolean' }, name: 'Reportes' },
+    showAjustes: { control: { type: 'boolean' }, name: 'Ajustes' },
   },
 
   render: ({
@@ -54,66 +44,58 @@ const meta = {
     showGuantera = true,
     showReportes = true,
     showAjustes = true,
-  }) => {
-    const [selected, setSelected] = React.useState<string | null>('mapa');
+  }) => (
+    <div style={{ width: 280, height: '80vh', margin: 'auto' }}>
+      <SideBar logoSrc={logo}>
+        {showMapa && (
+          <MenuItem
+            id="mapa"
+            label="Mapa"
+            iconSrc={MapPinIcon}
+            iconSelectedSrc={MapPinSelectedIcon}
+          />
+        )}
 
-    return (
-      <div style={{ width: 280, height: '80vh', margin: 'auto' }}>
-        <SideBar logoSrc={logo}>
-          {showMapa && (
-            <MenuItem
-              label="Mapa"
-              item="mapa"
-              hasIcon
-              state={selected === 'mapa' ? 'selected' : 'enable'}
-              onClick={() => setSelected('mapa')}
-            />
-          )}
+        {showGuantera && (
+          <MenuItem
+            id="guantera"
+            label="Guantera"
+            iconSrc={ReportIcon}
+            iconSelectedSrc={ReportSelectedIcon}
+          />
+        )}
 
-          {showGuantera && (
-            <MenuItem
-              label="Guantera"
-              item="guantera"
-              hasIcon
-              state={selected === 'guantera' ? 'selected' : 'enable'}
-              onClick={() => setSelected('guantera')}
-            />
-          )}
+        {showReportes && (
+          <MenuItem
+            id="reportes"
+            label="Reportes"
+            iconSrc={ReportIcon}
+            iconSelectedSrc={ReportSelectedIcon}
+          />
+        )}
 
-          {showReportes && (
-            <MenuItem
-              label="Reportes"
-              item="reportes"
-              hasIcon
-              state={selected === 'reportes' ? 'selected' : 'enable'}
-              onClick={() => setSelected('reportes')}
-            />
-          )}
-
-          {showAjustes && (
-            <MenuItem
-              label="Ajustes"
-              item="reportes"
-              hasIcon
-              hasDropdown
-              items={[
-                { key: 'general', label: 'General' },
-                { key: 'security', label: 'Seguridad' },
-                { key: 'notifications', label: 'Notificaciones' },
-              ]}
-              state={selected === 'ajustes' ? 'selected' : 'enable'}
-              onClick={() => setSelected('ajustes')}
-            />
-          )}
-        </SideBar>
-      </div>
-    );
-  },
+        {showAjustes && (
+          <MenuItem
+            id="ajustes"
+            label="Ajustes"
+            iconSrc={SettingsIcon}
+            hasDropdown
+            items={[
+              { id: 'general', label: 'General' },
+              { id: 'security', label: 'Seguridad' },
+              { id: 'notifications', label: 'Notificaciones' },
+            ]}
+          />
+        )}
+      </SideBar>
+    </div>
+  ),
 } satisfies Meta<SideBarStoryProps>;
 
 export default meta;
 
 type Story = StoryObj<SideBarStoryProps>;
+
 export const Interactive: Story = {
   args: {
     showMapa: true,
@@ -122,4 +104,3 @@ export const Interactive: Story = {
     showAjustes: true,
   },
 };
-

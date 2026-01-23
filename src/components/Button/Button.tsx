@@ -7,6 +7,7 @@ import { borderWidth } from '../../foundation/border';
 import { elevation } from '../../foundation/elevation';
 import { aquamarine, black } from '../../foundation/colors';
 import { gradientsButton } from '../../foundation/gradients';
+import { spacingPx, spacingRem } from '../../foundation';
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'small' | 'medium' | 'large';
@@ -23,19 +24,19 @@ const sizeStyles: Record<ButtonSize, any> = {
     ...typography.desktop.bodyS.bold,
     height: 32,
     minHeight: 32,
-    paddingInline: 16,
+    paddingInline:0,
   },
   medium: {
     ...typography.desktop.body.bold,
     height: 40,
     minHeight: 40,
-    paddingInline: 20,
+    paddingInline: 0,
   },
   large: {
     ...typography.desktop.body.bold,
     height: 48,
     minHeight: 48,
-    paddingInline: 24,
+    paddingInline: 0,
   },
 };
 
@@ -186,6 +187,7 @@ const Button = React.forwardRef(function Button(props: SMButtonProps, ref: any) 
   } = props;
 
   return (
+    <div className="ds-root">
     <MuiButton
       ref={ref}
       disabled={disabled}
@@ -198,9 +200,9 @@ const Button = React.forwardRef(function Button(props: SMButtonProps, ref: any) 
         textTransform: 'none',
 
         // fixed component behavior like Figma
-        width: 'auto',
-        minWidth: 'unset',
-        whiteSpace: 'nowrap',
+        width: '100%',
+        minWidth: 0,
+        whiteSpace: 'normal',
 
         display: 'inline-flex',
         alignItems: 'center',
@@ -213,10 +215,12 @@ const Button = React.forwardRef(function Button(props: SMButtonProps, ref: any) 
         ...variantStyles[dsVariant],
 
         ...(rest.sx || {}),
+        
       }}
     >
       {children}
     </MuiButton>
+    </div>
   );
 });
 

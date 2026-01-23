@@ -4,8 +4,10 @@ import "./components/Button/Button.css";
 import "./components/TextField/TextField.css";
 import "./assets/fonts/fonts.css";*/
 
-import './index.css';
+import './styles/fonts.css';
+import './styles/base.css';
 
 // API pública
 export * from './components';
 export * from './foundation';
+export * from './theme';

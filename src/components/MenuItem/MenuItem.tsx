@@ -11,70 +11,57 @@ import { typography } from '../../foundation/typography';
 import { aquamarine, black } from '../../foundation/colors';
 import { spacingRem } from '../../foundation/spacing';
 
-// Icons
-import ReportIcon from '../../assets/icons/report.svg';
-import ReportSelectedIcon from '../../assets/icons/report-selected.svg';
+/* =========================
+   Types
+========================= */
 
-import MapPinIcon from '../../assets/icons/map-pin.svg';
-import MapPinSelectedIcon from '../../assets/icons/map-pin-selected.svg';
-
-import MapPinnedIcon from '../../assets/icons/map-pinned.svg';
-import MapPinnedSelectedIcon from '../../assets/icons/map-pinned-selected.svg';
-
-import BriefcaseIcon from '../../assets/icons/briefcase-business.svg';
-import BriefcaseSelectedIcon from '../../assets/icons/briefcase-business-selected.svg';
-
-export type MenuItemItem = 'reportes' | 'mapa' | 'geocercas' | 'guantera';
-export type MenuItemState = 'selected' | 'enable' | 'hover';
+export type MenuItemState = 'selected' | 'enable';
 
 export type MenuItemSubItem = {
-  key: string;
+  id: string;
   label: string;
-  state?: MenuItemState;
   onClick?: () => void;
 };
 
 export type SMMenuItemProps = {
-  hasIcon?: boolean;
-  item?: MenuItemItem;
-  state?: MenuItemState;
+  /** Unique identifier (used by SideBar) */
+  id: string;
+
+  /** Visible label */
   label: string;
 
+  /** Optional icon */
+  iconSrc?: string;
+
+  /** Optional icon when selected */
+  iconSelectedSrc?: string;
+
+  /** Controlled visual state */
+  state?: MenuItemState;
+
+  /** Sidebar collapsed state */
   collapsed?: boolean;
 
   /** Dropdown */
   hasDropdown?: boolean;
   items?: MenuItemSubItem[];
 
+  /** Click handler */
   onClick?: () => void;
 };
 
-const iconMap = {
-  reportes: {
-    normal: ReportIcon,
-    selected: ReportSelectedIcon,
-  },
-  mapa: {
-    normal: MapPinIcon,
-    selected: MapPinSelectedIcon,
-  },
-  geocercas: {
-    normal: MapPinnedIcon,
-    selected: MapPinnedSelectedIcon,
-  },
-  guantera: {
-    normal: BriefcaseIcon,
-    selected: BriefcaseSelectedIcon,
-  },
-} as const;
+/* =========================
+   Component
+========================= */
 
 const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
   function MenuItem(
     {
-      hasIcon = true,
-      item = 'reportes',
-      state = 'enable',
+      id,
       label,
+      iconSrc,
+      iconSelectedSrc,
+      state = 'enable',
       collapsed = false,
 
       hasDropdown = false,
@@ -87,25 +74,16 @@ const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
     const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
-      if (collapsed) {
-        setOpen(false);
-      }
+      if (collapsed) setOpen(false);
     }, [collapsed]);
 
     const isSelected = state === 'selected';
-
-    const textColor = isSelected ? aquamarine[950] : black[400];
-
-    const bgImage = isSelected
-      ? `linear-gradient(90deg, ${aquamarine[400]} 0%, ${aquamarine[50]} 100%)`
-      : 'none';
-
-    const hoverBgColor = isSelected ? 'transparent' : aquamarine[50];
-
-    const icons = iconMap[item];
-    const iconSrc = isSelected ? icons.selected : icons.normal;
-
     const hasRealDropdown = hasDropdown && items.length > 0;
+
+    const icon =
+      isSelected && iconSelectedSrc
+        ? iconSelectedSrc
+        : iconSrc;
 
     const handleMainClick = () => {
       if (hasRealDropdown) {
@@ -125,22 +103,38 @@ const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
             gap: 1.5,
             px: 2,
             py: 1.5,
+            width: '100%',
             borderRadius: '12px',
             justifyContent: 'flex-start',
-            width: '100%',
             textAlign: 'left',
-            color: textColor,
-            backgroundImage: bgImage,
+
+            color: isSelected ? aquamarine[950] : black[400],
+            backgroundImage: isSelected
+              ? `linear-gradient(90deg, ${aquamarine[400]} 0%, ${aquamarine[50]} 100%)`
+              : 'none',
+
             '&:hover': {
-              backgroundColor: hoverBgColor,
+              backgroundColor: isSelected
+                ? 'transparent'
+                : aquamarine[50],
+            },
+
+            /* Remove default focus styles */
+            '&:focus': {
+              outline: 'none',
+            },
+            '&:focus-visible': {
+              outline: 'none',
+              boxShadow: 'none',
             },
           }}
         >
-          {hasIcon && (
+          {/* Icon */}
+          {icon && (
             <Box
               component="img"
-              src={iconSrc}
-              alt={item}
+              src={icon}
+              alt=""
               sx={{
                 width: 20,
                 height: 20,
@@ -150,27 +144,30 @@ const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
             />
           )}
 
+          {/* Label */}
           {!collapsed && (
             <Typography
               noWrap
               sx={{
                 ...typography.desktop.body.regular,
-                color: textColor,
                 flex: 1,
                 minWidth: 0,
-                lineHeight: '16px',
+                color: isSelected
+                  ? aquamarine[950]
+                  : black[400],
               }}
             >
               {label}
             </Typography>
           )}
 
+          {/* Dropdown arrow */}
           {hasRealDropdown && !collapsed && (
             <KeyboardArrowDownIcon
               sx={{
                 fontSize: 20,
                 color: black[500],
-                transition: 'transform 0.2s',
+                transition: 'transform 0.2s ease',
                 transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
               }}
             />
@@ -191,20 +188,23 @@ const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
             >
               {items.map((sub) => (
                 <ButtonBase
-                  key={sub.key}
-                  onClick={() => {
-                    sub.onClick?.();
-                  }}
+                  key={sub.id}
+                  onClick={sub.onClick}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
                     px: 2,
                     py: 1,
                     borderRadius: '10px',
                     textAlign: 'left',
-                    width: '100%',
                     '&:hover': {
                       backgroundColor: aquamarine[50],
+                    },
+
+                    '&:focus': {
+                      outline: 'none',
+                    },
+                    '&:focus-visible': {
+                      outline: 'none',
+                      boxShadow: 'none',
                     },
                   }}
                 >
@@ -212,10 +212,7 @@ const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
                     noWrap
                     sx={{
                       ...typography.desktop.bodyS.regular,
-                      color:
-                        sub.state === 'selected'
-                          ? aquamarine[950]
-                          : black[500],
+                      color: black[500],
                     }}
                   >
                     {sub.label}

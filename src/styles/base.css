@@ -1,0 +1,9 @@
+@import "./fonts.css";
+
+:root {
+  --ds-font-body: "Museo Sans", system-ui, sans-serif;
+}
+
+.ds-root {
+  font-family: var(--ds-font-body);
+}

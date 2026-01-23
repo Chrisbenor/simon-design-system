@@ -4,8 +4,8 @@ import type { Preview } from "@storybook/react";
 
 
 // 1) Tus estilos base del proyecto (si ahí tienes resets, fuentes, etc.)
-import "../src/index.css";
-import "../src/assets/fonts/fonts.css";
+import "../src/styles/index.css";
+import "../src/styles/fonts.css";
 
 // 2) Si tienes estilos de App (opcional)
 //import "../src/App.css";
