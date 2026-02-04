@@ -10,12 +10,9 @@ import "../src/styles/fonts.css";
 // 2) Si tienes estilos de App (opcional)
 //import "../src/App.css";
 
-// 3) Tus tokens generados por Style Dictionary (ajusta la ruta real)
-//import "../src/styles/tokens.css";
 import "../src/styles/tokens.light.css";
 import "../src/styles/tokens.dark.css";
 
-// ✅ Breakpoints para el toolbar de Viewport
 const BREAKPOINTS = {
   mobile: {
     name: "Mobile (320)",
@@ -44,7 +41,6 @@ const BREAKPOINTS = {
   },
 };
 
-// ✅ Theme switch en toolbar (Light/Dark)
 export const globalTypes = {
   theme: {
     name: "Theme",
@@ -63,7 +59,6 @@ export const globalTypes = {
 const withTheme = (Story: any, ctx: any) => {
   const theme = ctx.globals.theme || "light";
 
-  // 👇 aplica data-theme en <html> (documentElement) SIEMPRE
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -74,7 +69,7 @@ const preview: Preview = {
   parameters: {
     docs: {
       source: {
-        type: "dynamic", // genera código React
+        type: "dynamic", 
       },
        canvas: {
         withToolbar: false,
@@ -84,9 +79,14 @@ const preview: Preview = {
     controls: {
       expanded: true,
     },
+    backgrounds: {
+      default: 'white',
+      values: [{ name: 'white', value: '#ffffff' }],
+    },
+    grid: {
+      disable: true,
+    },
     
-
-    // ✅ Viewport toolbar / breakpoints
     viewport: {
       viewports: BREAKPOINTS,
       defaultViewport: "desktop",

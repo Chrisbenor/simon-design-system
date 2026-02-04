@@ -4,16 +4,6 @@ import React from 'react';
 import SideBar from './SideBar';
 import MenuItem from '../MenuItem/MenuItem';
 
-import logo from '../../assets/logo-light.svg';
-
-import MapPinIcon from '../../assets/icons/map-pin.svg';
-import MapPinSelectedIcon from '../../assets/icons/map-pin-selected.svg';
-
-import ReportIcon from '../../assets/icons/report.svg';
-import ReportSelectedIcon from '../../assets/icons/report-selected.svg';
-
-import SettingsIcon from '../../assets/icons/map-pinned.svg';
-
 type SideBarStoryProps = {
   showMapa?: boolean;
   showGuantera?: boolean;
@@ -46,13 +36,13 @@ const meta = {
     showAjustes = true,
   }) => (
     <div style={{ width: 280, height: '80vh', margin: 'auto' }}>
-      <SideBar logoSrc={logo}>
+      <SideBar logoSrc='/logo/logo-light.svg'>
         {showMapa && (
           <MenuItem
             id="mapa"
             label="Mapa"
-            iconSrc={MapPinIcon}
-            iconSelectedSrc={MapPinSelectedIcon}
+            iconSrc='/icons/map-pin.svg'
+            iconSelectedSrc='/icons/map-pin-selected.svg'
           />
         )}
 
@@ -60,8 +50,8 @@ const meta = {
           <MenuItem
             id="guantera"
             label="Guantera"
-            iconSrc={ReportIcon}
-            iconSelectedSrc={ReportSelectedIcon}
+            iconSrc='/icons/report.svg'
+            iconSelectedSrc='/icons/report-selected.svg'
           />
         )}
 
@@ -69,8 +59,8 @@ const meta = {
           <MenuItem
             id="reportes"
             label="Reportes"
-            iconSrc={ReportIcon}
-            iconSelectedSrc={ReportSelectedIcon}
+            iconSrc='/icons/report.svg'
+            iconSelectedSrc='/icons/report-selected.svg'
           />
         )}
 
@@ -78,7 +68,7 @@ const meta = {
           <MenuItem
             id="ajustes"
             label="Ajustes"
-            iconSrc={SettingsIcon}
+            iconSrc='/icons/map-pinned.svg'
             hasDropdown
             items={[
               { id: 'general', label: 'General' },

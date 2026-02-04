@@ -19,7 +19,7 @@ const meta: Meta<SMFABProps> = {
 
     type: {
       control: { type: 'inline-radio' },
-      options: ['principal', 'secundario', 'ghost'],
+      options: ['primary', 'secondary', 'ghost'],
     },
 
     state: {
@@ -43,7 +43,7 @@ type Story = StoryObj<SMFABProps>;
 export const Playground: Story = {
   args: {
     size: 'normal',
-    type: 'principal',
+    type: 'primary',
     state: 'default',
     disabled: false,
   },

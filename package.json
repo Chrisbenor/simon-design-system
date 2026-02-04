@@ -2,7 +2,7 @@
   "name": "simon-design-system",
   "description": "A design system for Simon Movilidad built with React and MUI.",
   "private": false,
-  "version": "0.1.13",
+  "version": "0.1.14",
   "type": "module",
   "main": "dist/simon-design-system.cjs",
   "module": "dist/simon-design-system.es.js",

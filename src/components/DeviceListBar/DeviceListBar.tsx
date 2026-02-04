@@ -10,7 +10,6 @@ import CardsMap, { SMCardsMapProps } from '../CardsMap/CardsMap';
 
 export type DeviceListBarProps = {
   devices: SMCardsMapProps[];
-  height?: number | string;
   sx?: any;
 };
 
@@ -18,7 +17,6 @@ const DEFAULT_ITEM_HEIGHT = 200;
 
 const DeviceListBar = ({
   devices,
-  height = '100%',
   sx,
 }: DeviceListBarProps) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -49,7 +47,7 @@ const DeviceListBar = ({
     <Box
       ref={containerRef}
       sx={{
-        height,
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#fff',

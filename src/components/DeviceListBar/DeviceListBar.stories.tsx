@@ -4,10 +4,6 @@ import React from 'react';
 import DeviceListBar, { DeviceListBarProps } from './DeviceListBar';
 import { SMCardsMapProps } from '../CardsMap/CardsMap';
 
-/* =========================
-   Mock data
-========================= */
-
 const devices: SMCardsMapProps[] = [
   {
     id: 1,
@@ -69,7 +65,7 @@ const meta: Meta<DeviceListBarProps> = {
   render: (args) => (
     <div
       style={{
-        height: 670,
+        height: 640,
         width: 360,
         border: '1px dashed #E0E0E0',
         padding: 8,

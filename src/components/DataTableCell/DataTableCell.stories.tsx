@@ -13,6 +13,12 @@ const meta: Meta<DataTableCellProps> = {
   title: 'Components/DataTableCell',
   component: DataTableCell,
 
+  args: {
+    buttonIcon1Src: '/icons/report.svg',
+    buttonIcon2Src: '/icons/map-pin.svg',
+    buttonIcon3Src: '/icons/map-pinned.svg',
+  },
+
   argTypes: {
     /* =========================
        TYPE
@@ -31,11 +37,11 @@ const meta: Meta<DataTableCellProps> = {
     },
 
     /* =========================
-       DROPDOWN (header / normal)
+       DROPDOWN
     ========================= */
     options: {
       control: false,
-      if: { arg: 'type', eq: 'normal' },
+      if: { arg: 'type', eq: 'header' },
     },
 
     /* =========================
@@ -76,8 +82,23 @@ const meta: Meta<DataTableCellProps> = {
     },
 
     /* =========================
-       BUTTONS
+       BUTTON ICONS
     ========================= */
+    buttonIcon1Src: {
+      control: 'text',
+      if: { arg: 'type', eq: 'buttons' },
+    },
+
+    buttonIcon2Src: {
+      control: 'text',
+      if: { arg: 'type', eq: 'buttons' },
+    },
+
+    buttonIcon3Src: {
+      control: 'text',
+      if: { arg: 'type', eq: 'buttons' },
+    },
+
     onClickButton1: {
       action: 'button-1',
       if: { arg: 'type', eq: 'buttons' },
@@ -116,7 +137,7 @@ type Story = StoryObj<DataTableCellProps>;
 export const Header: Story = {
   args: {
     type: 'header',
-    text: 'Header text',
+    text: 'Header',
     options: exampleOptions,
   },
 };
@@ -132,6 +153,9 @@ export const Normal: Story = {
 export const Buttons: Story = {
   args: {
     type: 'buttons',
+    buttonIcon1Src: '/icons/report.svg',
+    buttonIcon2Src: '/icons/map-pin.svg',
+    buttonIcon3Src: '/icons/map-pinned.svg',
   },
 };
 

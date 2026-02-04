@@ -18,6 +18,11 @@ const WIDTH_MAP: Record<ContainerWidth, number> = {
 const meta: Meta<NavBarStoryProps> = {
   title: 'Components/NavBar',
   component: NavBar,
+
+  args: {
+    containerWidth: 'tablet',
+  },
+
   argTypes: {
     title: { control: 'text' },
 

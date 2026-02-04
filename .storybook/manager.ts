@@ -4,7 +4,7 @@ import { create } from "@storybook/theming";
 const simonTheme = create({
   base: "light", // o "light"
   brandTitle: "Simon Design System",
-  brandImage: "/assets/simon.svg",
+  brandImage: "/logo/simon.svg",
   brandUrl: "https://tusitio.com",
 });
 

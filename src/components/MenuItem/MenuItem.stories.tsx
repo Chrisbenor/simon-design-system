@@ -95,8 +95,8 @@ const meta: Meta<MenuItemStoryProps> = {
           hasDropdown={hasDropdown}
           items={items}
           state={state}
-          iconSrc={icon ? '/icons/placeholder.svg' : undefined}
-          iconSelectedSrc={icon ? '/icons/placeholder-selected.svg' : undefined}
+          iconSrc={icon ? './icons/map-pinned.svg' : undefined}
+          iconSelectedSrc={icon ? './icons/map-pinned.svg' : undefined}
           onClick={() =>
             setState((prev) =>
               prev === 'selected' ? 'enable' : 'selected'
