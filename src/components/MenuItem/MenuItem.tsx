@@ -24,35 +24,23 @@ export type MenuItemSubItem = {
 };
 
 export type SMMenuItemProps = {
-  /** Unique identifier (used by SideBar) */
   id: string;
 
-  /** Visible label */
   label: string;
 
-  /** Optional icon */
   iconSrc?: string;
 
-  /** Optional icon when selected */
   iconSelectedSrc?: string;
 
-  /** Controlled visual state */
   state?: MenuItemState;
 
-  /** Sidebar collapsed state */
   collapsed?: boolean;
 
-  /** Dropdown */
   hasDropdown?: boolean;
   items?: MenuItemSubItem[];
 
-  /** Click handler */
   onClick?: () => void;
 };
-
-/* =========================
-   Component
-========================= */
 
 const MenuItem = React.forwardRef<HTMLDivElement, SMMenuItemProps>(
   function MenuItem(

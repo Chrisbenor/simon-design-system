@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, BoxProps } from '@mui/material';
 
 import { typography } from '../../foundation/typography';
-import { spacingPx } from '../../foundation/spacing';
+import { spacingPx, spacingRem } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black, green, red, yellow } from '../../foundation/colors';
 
@@ -133,10 +133,11 @@ const StatusBadge = React.forwardRef(function StatusBadge(
       tabIndex={0}
       {...rest}
       sx={{
-        width: '1px',
+        width: 'fit-content',
+        maxWidth: 'fit-content',
         minWidth: 'unset',
         whiteSpace: 'nowrap',
-
+          
         display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -150,9 +151,9 @@ const StatusBadge = React.forwardRef(function StatusBadge(
         minHeight: { xs: 24, sm: 24, md: 24 },
 
         paddingInline: {
-          xs: spacingPx.compact,
-          sm: spacingPx.compact,
-          md: spacingPx.compact,
+          xs: spacingRem.compact,
+          sm: spacingRem.compact,
+          md: spacingRem.compact,
         },
 
         gap: {

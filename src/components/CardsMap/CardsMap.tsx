@@ -3,7 +3,7 @@ import { alpha } from '@mui/material/styles';
 import { Box, Typography, ListItemButton, Tooltip } from '@mui/material';
 
 import { typography } from '../../foundation/typography';
-import { spacingPx } from '../../foundation/spacing';
+import { spacingPx, spacingRem } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { elevation } from '../../foundation/elevation';
 import { aquamarine, black, yellow, red } from '../../foundation/colors';
@@ -17,6 +17,8 @@ export type DeviceStatus = 'online' | 'offline' | 'warning' | string;
 export type SMCardsMapProps = {
   id: string | number;
 
+  index?: number;
+
   name: string;
   uniqueId?: string | null;
   phone?: string | null;
@@ -26,7 +28,10 @@ export type SMCardsMapProps = {
   interactive?: boolean;
 
   selectedId?: string | number | null;
-  onSelect?: (id: string | number) => void;
+  onSelect?: (payload: {
+    id: string | number;
+    index: number;
+  }) => void;
 
   getStatusLabel?: (status?: DeviceStatus) => string;
 
@@ -82,6 +87,7 @@ const statusTokens = (key: 'online' | 'offline' | 'warning') => {
 
 const CardsMap = ({
   id,
+  index,
   name,
   uniqueId,
   phone,
@@ -115,7 +121,13 @@ const CardsMap = ({
   return (
     <div style={style}>
       <ListItemButton
-        onClick={() => !disabled && onSelect?.(id)}
+        onClick={() =>
+          !disabled &&
+          onSelect?.({
+            id,
+            index: index ?? -1,
+          })
+        }
         disabled={disabled}
         selected={isSelected}
         sx={{
@@ -139,8 +151,8 @@ const CardsMap = ({
             sx={{
               display: 'flex',
               alignItems: 'flex-start',
-              justifyContent: 'space-between',
-              gap: spacingPx.small,
+              justifyContent: 'flex-start',
+              gap: spacingRem.small,
 
               borderRadius: 2,
               border: `${borderWidth.extraSmall}px solid ${black[200]}`,
@@ -254,7 +266,7 @@ const CardsMap = ({
                   borderRadius: 2,
                   display: 'grid',
                   placeItems: 'center',
-                  flex: '0 0 auto',
+                  flex: 'none',
 
                   backgroundColor: tokens.bg,
                   border: `1px solid ${tokens.border}`,

@@ -9,6 +9,11 @@ type ButtonStoryProps = SMButtonProps & {
 const meta: Meta<ButtonStoryProps> = {
   title: 'Components/Button',
   component: Button,
+
+  args: {
+    fullWidth: true,
+  },
+
   argTypes: {
     label: { control: 'text' },
 
@@ -26,6 +31,10 @@ const meta: Meta<ButtonStoryProps> = {
     iconLeft: { control: false },
     iconRight: { control: false },
     onClick: { action: 'clicked' },
+
+    fullWidth: {
+      control: 'boolean',
+    },
   },
 
   render: ({ label, ...args }) => (

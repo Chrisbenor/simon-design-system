@@ -43,7 +43,7 @@ type Story = StoryObj<BadgeStoryProps>;
 
 export const Default: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: true,
     dsColor: 'primary',
     dsPill: 'no',
@@ -52,7 +52,7 @@ export const Default: Story = {
 
 export const Pill: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: true,
     dsColor: 'primary',
     dsPill: 'yes',
@@ -61,7 +61,7 @@ export const Pill: Story = {
 
 export const Secondary: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: true,
     dsColor: 'secondary',
     dsPill: 'no',
@@ -70,7 +70,7 @@ export const Secondary: Story = {
 
 export const Correct: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: true,
     dsColor: 'correct',
     dsPill: 'no',
@@ -79,7 +79,7 @@ export const Correct: Story = {
 
 export const Error: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: true,
     dsColor: 'error',
     dsPill: 'no',
@@ -88,7 +88,7 @@ export const Error: Story = {
 
 export const Warning: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: true,
     dsColor: 'warning',
     dsPill: 'no',
@@ -97,7 +97,7 @@ export const Warning: Story = {
 
 export const NoText: Story = {
   args: {
-    storyText: 'Badges',
+    storyText: 'Badge',
     hasText: false,
     dsColor: 'primary',
     dsPill: 'no',

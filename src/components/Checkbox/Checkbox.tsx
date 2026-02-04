@@ -2,12 +2,11 @@ import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 
 import { typography } from '../../foundation/typography';
-import { spacingPx } from '../../foundation/spacing';
+import { spacingRem } from '../../foundation/spacing';
 import { borderWidth } from '../../foundation/border';
 import { aquamarine, black } from '../../foundation/colors';
 
 export type SMCheckboxProps = {
-  /** Label content rendered to the right (optional). Use children instead of label prop. */
   children?: React.ReactNode;
   showLabel?: boolean;
 
@@ -104,7 +103,8 @@ const Checkbox = React.forwardRef(function Checkbox(props: SMCheckboxProps, ref:
         width: fullWidth ? '100%' : 'fit-content',
         display: 'inline-flex',
         alignItems: 'center',
-        gap: spacingPx.compact,
+        gap: spacingRem.extraSmall,
+        paddingRight: spacingRem.small,
         cursor: disabled ? 'not-allowed' : 'pointer',
         userSelect: 'none',
         borderRadius: 8,

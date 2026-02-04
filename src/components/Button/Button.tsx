@@ -7,38 +7,51 @@ import { borderWidth } from '../../foundation/border';
 import { elevation } from '../../foundation/elevation';
 import { aquamarine, black } from '../../foundation/colors';
 import { gradientsButton } from '../../foundation/gradients';
-import { spacingPx, spacingRem } from '../../foundation';
+
+/* =========================
+   Types
+========================= */
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 type ButtonSize = 'small' | 'medium' | 'large';
 
-export type SMButtonProps = Omit<MuiButtonProps, 'variant' | 'size' | 'color'> & {
+export type SMButtonProps = Omit<
+  MuiButtonProps,
+  'variant' | 'size' | 'color'
+> & {
   dsVariant?: ButtonVariant;
   dsSize?: ButtonSize;
-  iconLeft?: unknown;
-  iconRight?: unknown;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode;
+
+  fullWidth?: boolean;
 };
+
+/* =========================
+   Size styles
+========================= */
 
 const sizeStyles: Record<ButtonSize, any> = {
   small: {
     ...typography.desktop.bodyS.bold,
     height: 32,
     minHeight: 32,
-    paddingInline:0,
   },
   medium: {
     ...typography.desktop.body.bold,
     height: 40,
     minHeight: 40,
-    paddingInline: 0,
   },
   large: {
     ...typography.desktop.body.bold,
     height: 48,
     minHeight: 48,
-    paddingInline: 0,
   },
 };
+
+/* =========================
+   Helpers
+========================= */
 
 const gradientBorder = (innerBg: string) => ({
   border: `${borderWidth.extraSmall}px solid transparent`,
@@ -47,13 +60,11 @@ const gradientBorder = (innerBg: string) => ({
 
 const focusRing = `0 0 0 3px ${alpha(aquamarine[400], 0.35)}`;
 
-const focusSelectors = {
-  '&.Mui-focusVisible': {},
-  '&:focus-visible': {},
-};
+/* =========================
+   Variant styles
+========================= */
 
 const variantStyles: Record<ButtonVariant, any> = {
-  
   primary: {
     background: gradientsButton.primaryDefault,
     color: aquamarine[950],
@@ -62,18 +73,19 @@ const variantStyles: Record<ButtonVariant, any> = {
 
     '&:hover': {
       background: aquamarine[600],
-      color: aquamarine[50], 
-      boxShadow: elevation.small,
+      border: `${borderWidth.extraSmall}px solid transparent`,
+      color: aquamarine[50],
+      boxShadow: 'none',
     },
 
     '&:active': {
       background: gradientsButton.primaryPressed,
+      border: `${borderWidth.extraSmall}px solid transparent`,
       color: aquamarine[50],
       boxShadow: elevation.extraSmall,
     },
 
-    ...focusSelectors,
-    '&.Mui-focusVisible, &:focus-visible': {
+    '&.Mui-focusVisible': {
       background: gradientsButton.primaryHover,
       color: aquamarine[950],
       border: `${borderWidth.extraSmall}px solid ${gradientsButton.primaryHover}`,
@@ -87,61 +99,55 @@ const variantStyles: Record<ButtonVariant, any> = {
     },
   },
 
-secondary: {
+  secondary: {
     position: 'relative',
     overflow: 'hidden',
     borderRadius: 9999,
-
     backgroundColor: '#ffffff',
     color: aquamarine[700],
-    boxShadow: 'none',
     border: `${borderWidth.extraSmall}px solid transparent`,
 
     '&::before': {
-        content: '""',
-        position: 'absolute',
-        inset: 0,
-        padding: `${borderWidth.small}px`,
-        borderRadius: 9999,
-        background: gradientsButton.borderVertical,
-
-        WebkitMask:
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      padding: `${borderWidth.small}px`,
+      borderRadius: 9999,
+      background: gradientsButton.borderVertical,
+      WebkitMask:
         'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-        WebkitMaskComposite: 'xor',
-        maskComposite: 'exclude',
-
-        pointerEvents: 'none',
+      WebkitMaskComposite: 'xor',
+      maskComposite: 'exclude',
+      pointerEvents: 'none',
     },
 
     '& > *': {
-        position: 'relative',
-        zIndex: 1,
+      position: 'relative',
+      zIndex: 1,
     },
 
     '&:hover': {
-        backgroundColor: aquamarine[50],
-        color: aquamarine[800],
+      backgroundColor: aquamarine[50],
+      color: aquamarine[800],
     },
 
     '&:active': {
-        backgroundColor: '#ffffff',
-        color: aquamarine[800],
-        boxShadow: `0 0 0 4px rgba(0, 241, 199, 0.25)`,
+      backgroundColor: '#ffffff',
+      color: aquamarine[800],
+      boxShadow: `0 0 0 4px rgba(0, 241, 199, 0.25)`,
     },
 
-    '&.Mui-focusVisible, &:focus-visible': {
-        boxShadow: `0 0 0 3px rgba(0, 241, 199, 0.35)`,
+    '&.Mui-focusVisible': {
+      boxShadow: `0 0 0 3px rgba(0, 241, 199, 0.35)`,
     },
 
     '&.Mui-disabled': {
-        backgroundColor: '#ffffff',
-        color: black[400],
-        boxShadow: 'none',
-        '&::before': {
-            background: black[200],
-        },
+      color: black[400],
+      '&::before': {
+        background: black[200],
+      },
     },
-    },
+  },
 
   ghost: {
     background: 'transparent',
@@ -150,6 +156,7 @@ secondary: {
     boxShadow: 'none',
 
     '&:hover': {
+      border: `${borderWidth.extraSmall}px solid transparent`,
       background: aquamarine[50],
       color: aquamarine[800],
     },
@@ -157,72 +164,78 @@ secondary: {
     '&:active': {
       ...gradientBorder('#ffffff'),
       color: aquamarine[800],
-      boxShadow: 'none',
     },
 
-    ...focusSelectors,
-    '&.Mui-focusVisible, &:focus-visible': {
+    '&.Mui-focusVisible': {
       background: alpha(aquamarine[400], 0.06),
       color: aquamarine[800],
       boxShadow: focusRing,
     },
 
     '&.Mui-disabled': {
-      background: 'transparent',
-      borderColor: 'transparent',
       color: black[400],
     },
   },
 };
 
-const Button = React.forwardRef(function Button(props: SMButtonProps, ref: any) {
-  const {
-    dsVariant = 'primary',
-    dsSize = 'medium',
-    iconLeft,
-    iconRight,
-    children,
-    disabled,
-    ...rest
-  } = props;
+/* =========================
+   Component
+========================= */
 
-  return (
-    <div className="ds-root">
-    <MuiButton
-      ref={ref}
-      disabled={disabled}
-      disableElevation
-      {...rest}
-      startIcon={iconLeft as any}
-      endIcon={iconRight as any}
-      sx={{
-        borderRadius: 9999,
-        textTransform: 'none',
+const Button = React.forwardRef<HTMLButtonElement, SMButtonProps>(
+  function Button(props, ref) {
+    const {
+      dsVariant = 'primary',
+      dsSize = 'medium',
+      iconLeft,
+      iconRight,
+      children,
+      disabled,
+      fullWidth = false,
+      ...rest
+    } = props;
 
-        // fixed component behavior like Figma
-        width: '100%',
-        minWidth: 0,
-        whiteSpace: 'normal',
+    return (
+      <MuiButton
+        ref={ref}
+        disabled={disabled}
+        disableRipple
+        disableFocusRipple
+        disableTouchRipple
+        {...rest}
+        startIcon={iconLeft}
+        endIcon={iconRight}
+        sx={{
+          borderRadius: 9999,
+          textTransform: 'none',
 
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+          padding: '8px 16px',
 
-        fontFamily: typography.desktop.body.bold.fontFamily,
-        lineHeight: typography.desktop.body.bold.lineHeight,
+          width: fullWidth ? '100%' : 'fit-content',
+          minWidth: 'unset',
+          whiteSpace: 'nowrap',
 
-        ...sizeStyles[dsSize],
-        ...variantStyles[dsVariant],
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
 
-        ...(rest.sx || {}),
-        
-      }}
-    >
-      {children}
-    </MuiButton>
-    </div>
-  );
-});
+          fontFamily: typography.desktop.body.bold.fontFamily,
+          lineHeight: typography.desktop.body.bold.lineHeight,
+
+          outline: 'none',
+          '&:focus, &:focus-visible': { outline: 'none' },
+
+          ...sizeStyles[dsSize],
+          ...variantStyles[dsVariant],
+
+          ...(rest.sx || {}),
+        }}
+      >
+        {children}
+      </MuiButton>
+    );
+  }
+);
 
 export default Button;
 export { Button };

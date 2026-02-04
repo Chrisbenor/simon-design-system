@@ -81,7 +81,7 @@ const Badge = React.forwardRef(function Badge(props: SMBadgeProps, ref: any) {
       tabIndex={0}
       {...rest}
       sx={{
-        width: '    ',
+        width: 'auto',
         minWidth: 'unset',
         whiteSpace: 'nowrap',
 
